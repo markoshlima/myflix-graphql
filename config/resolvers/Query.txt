@@ -1,0 +1,124 @@
+{
+    "resolvers": [
+        {
+            "typeName": "Query",
+            "fieldName": "getActor",
+            "dataSourceName": "ActorDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/getActor",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"GetItem\",\n  \"key\": {\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.id_actor),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "getCharacter",
+            "dataSourceName": "Character",
+            "resolverArn": "arn+apiId/types/Query/resolvers/getCharacter",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"GetItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.id_movie),\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.id_actor),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "getCustomer",
+            "dataSourceName": "CustomerDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/getCustomer",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"GetItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.id_customer),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "getMovie",
+            "dataSourceName": "MovieDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/getMovie",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"GetItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.id_movie),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "getWatch",
+            "dataSourceName": "WatchDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/getWatch",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"GetItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.id_customer),\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.id_movie),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "listActors",
+            "dataSourceName": "ActorDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/listActors",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"Scan\",\n  \"filter\": #if($context.args.filter) $util.transform.toDynamoDBFilterExpression($ctx.args.filter) #else null #end,\n  \"limit\": $util.defaultIfNull($ctx.args.limit, 20),\n  \"nextToken\": $util.toJson($util.defaultIfNullOrEmpty($ctx.args.nextToken, null)),\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "listCharacters",
+            "dataSourceName": "Character",
+            "resolverArn": "arn+apiId/types/Query/resolvers/listCharacters",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"Scan\",\n  \"filter\": #if($context.args.filter) $util.transform.toDynamoDBFilterExpression($ctx.args.filter) #else null #end,\n  \"limit\": $util.defaultIfNull($ctx.args.limit, 20),\n  \"nextToken\": $util.toJson($util.defaultIfNullOrEmpty($ctx.args.nextToken, null)),\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "listCharactersActor",
+            "dataSourceName": "Character",
+            "resolverArn": "arn+apiId/types/Query/resolvers/listCharactersActor",
+            "requestMappingTemplate": "## Below example shows how to look up an item with a Primary Key of \"id\" from GraphQL arguments\n## The helper $util.dynamodb.toDynamoDBJson automatically converts to a DynamoDB formatted request\n## There is a \"context\" object with arguments, identity, headers, and parent field information you can access.\n## It also has a shorthand notation avaialable:\n##  - $context or $ctx is the root object\n##  - $ctx.arguments or $ctx.args contains arguments\n##  - $ctx.identity has caller information, such as $ctx.identity.username\n##  - $ctx.request.headers contains headers, such as $context.request.headers.xyz\n##  - $ctx.source is a map of the parent field, for instance $ctx.source.xyz\n## Read more: https://docs.aws.amazon.com/appsync/latest/devguide/resolver-mapping-template-reference.html\n\n{\n    \"version\" : \"2017-02-28\",\n    \"operation\" : \"Scan\",\n    \"filter\" : {\n        \"expression\" : \"id_actor = :id_actor\",\n        \"expressionValues\" : {\n            \":id_actor\" : $util.dynamodb.toDynamoDBJson($ctx.args.id_actor)\n        }\n    }\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "listCustomers",
+            "dataSourceName": "CustomerDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/listCustomers",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"Scan\",\n  \"filter\": #if($context.args.filter) $util.transform.toDynamoDBFilterExpression($ctx.args.filter) #else null #end,\n  \"limit\": $util.defaultIfNull($ctx.args.limit, 20),\n  \"nextToken\": $util.toJson($util.defaultIfNullOrEmpty($ctx.args.nextToken, null)),\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "listMovies",
+            "dataSourceName": "MovieDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/listMovies",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"Scan\",\n  \"filter\": #if($context.args.filter) $util.transform.toDynamoDBFilterExpression($ctx.args.filter) #else null #end,\n  \"limit\": $util.defaultIfNull($ctx.args.limit, 20),\n  \"nextToken\": $util.toJson($util.defaultIfNullOrEmpty($ctx.args.nextToken, null)),\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "listWatches",
+            "dataSourceName": "WatchDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/listWatches",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"Scan\",\n  \"filter\": #if($context.args.filter) $util.transform.toDynamoDBFilterExpression($ctx.args.filter) #else null #end,\n  \"limit\": $util.defaultIfNull($ctx.args.limit, 20),\n  \"nextToken\": $util.toJson($util.defaultIfNullOrEmpty($ctx.args.nextToken, null)),\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Query",
+            "fieldName": "listWatchesMovie",
+            "dataSourceName": "WatchDynamodb",
+            "resolverArn": "arn+apiId/types/Query/resolvers/listWatchesMovie",
+            "requestMappingTemplate": "## Below example shows how to look up an item with a Primary Key of \"id\" from GraphQL arguments\n## The helper $util.dynamodb.toDynamoDBJson automatically converts to a DynamoDB formatted request\n## There is a \"context\" object with arguments, identity, headers, and parent field information you can access.\n## It also has a shorthand notation avaialable:\n##  - $context or $ctx is the root object\n##  - $ctx.arguments or $ctx.args contains arguments\n##  - $ctx.identity has caller information, such as $ctx.identity.username\n##  - $ctx.request.headers contains headers, such as $context.request.headers.xyz\n##  - $ctx.source is a map of the parent field, for instance $ctx.source.xyz\n## Read more: https://docs.aws.amazon.com/appsync/latest/devguide/resolver-mapping-template-reference.html\n\n{\n    \"version\" : \"2017-02-28\",\n    \"operation\" : \"Scan\",\n    \"filter\" : {\n        \"expression\" : \"id_movie = :id_movie\",\n        \"expressionValues\" : {\n            \":id_movie\" : $util.dynamodb.toDynamoDBJson($ctx.args.id_movie)\n        }\n    }\n}",
+            "responseMappingTemplate": "## Pass back the result from DynamoDB. **\n$util.toJson($ctx.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        }
+    ]
+}

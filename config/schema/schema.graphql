@@ -1,0 +1,254 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Actor {
+  birth_date: String
+  id_actor: String!
+  name: String
+}
+
+type ActorConnection {
+  items: [Actor]
+  nextToken: String
+}
+
+type Character {
+  id_actor: String!
+  id_movie: String!
+  name: String
+}
+
+type CharacterConnection {
+  items: [Character]
+  nextToken: String
+}
+
+type Customer {
+  birth_date: String
+  id_customer: String!
+  name: String
+}
+
+type CustomerConnection {
+  items: [Customer]
+  nextToken: String
+}
+
+type Movie {
+  id_movie: String!
+  name: String
+  year: Int
+}
+
+type MovieConnection {
+  items: [Movie]
+  nextToken: String
+}
+
+type Mutation {
+  createActor(input: CreateActorInput!): Actor
+  createCharacter(input: CreateCharacterInput!): Character
+  createCustomer(input: CreateCustomerInput!): Customer
+  createMovie(input: CreateMovieInput!): Movie
+  createWatch(input: CreateWatchInput!): Watch
+  deleteActor(input: DeleteActorInput!): Actor
+  deleteCharacter(input: DeleteCharacterInput!): Character
+  deleteCustomer(input: DeleteCustomerInput!): Customer
+  deleteMovie(input: DeleteMovieInput!): Movie
+  deleteWatch(input: DeleteWatchInput!): Watch
+  updateActor(input: UpdateActorInput!): Actor
+  updateCharacter(input: UpdateCharacterInput!): Character
+  updateCustomer(input: UpdateCustomerInput!): Customer
+  updateMovie(input: UpdateMovieInput!): Movie
+  updateWatch(input: UpdateWatchInput!): Watch
+}
+
+type Query {
+  getActor(id_actor: String!): Actor
+  getCharacter(id_actor: String!, id_movie: String!): Character
+  getCustomer(id_customer: String!): Customer
+  getMovie(id_movie: String!): Movie
+  getWatch(id_customer: String!, id_movie: String!): Watch
+  listActors(filter: TableActorFilterInput, limit: Int, nextToken: String): ActorConnection
+  listCharacters(filter: TableCharacterFilterInput, limit: Int, nextToken: String): CharacterConnection
+  listCharactersActor(id_actor: String!, limit: Int, nextToken: String): CharacterConnection
+  listCustomers(filter: TableCustomerFilterInput, limit: Int, nextToken: String): CustomerConnection
+  listMovies(filter: TableMovieFilterInput, limit: Int, nextToken: String): MovieConnection
+  listWatches(filter: TableWatchFilterInput, limit: Int, nextToken: String): WatchConnection
+  listWatchesMovie(id_movie: String!, limit: Int, nextToken: String): WatchConnection
+}
+
+type Subscription {
+  onCreateActor(id_actor: String): Actor @aws_subscribe(mutations : ["createActor"])
+  onCreateCharacter(id_actor: String, id_movie: String): Character @aws_subscribe(mutations : ["createCharacter"])
+  onCreateCustomer(id_customer: String): Customer @aws_subscribe(mutations : ["createCustomer"])
+  onCreateMovie(id_movie: String): Movie @aws_subscribe(mutations : ["createMovie"])
+  onCreateWatch(id_customer: String, id_movie: String): Watch @aws_subscribe(mutations : ["createWatch"])
+  onDeleteActor(id_actor: String): Actor @aws_subscribe(mutations : ["deleteActor"])
+  onDeleteCharacter(id_actor: String, id_movie: String): Character @aws_subscribe(mutations : ["deleteCharacter"])
+  onDeleteCustomer(id_customer: String): Customer @aws_subscribe(mutations : ["deleteCustomer"])
+  onDeleteMovie(id_movie: String): Movie @aws_subscribe(mutations : ["deleteMovie"])
+  onDeleteWatch(id_customer: String, id_movie: String): Watch @aws_subscribe(mutations : ["deleteWatch"])
+  onUpdateActor(id_actor: String): Actor @aws_subscribe(mutations : ["updateActor"])
+  onUpdateCharacter(id_actor: String, id_movie: String): Character @aws_subscribe(mutations : ["updateCharacter"])
+  onUpdateCustomer(id_customer: String): Customer @aws_subscribe(mutations : ["updateCustomer"])
+  onUpdateMovie(id_movie: String): Movie @aws_subscribe(mutations : ["updateMovie"])
+  onUpdateWatch(id_customer: String, id_movie: String): Watch @aws_subscribe(mutations : ["updateWatch"])
+}
+
+type Watch {
+  date: String
+  id_customer: String!
+  id_movie: String!
+}
+
+type WatchConnection {
+  items: [Watch]
+  nextToken: String
+}
+
+input CreateActorInput {
+  id_actor: String!
+}
+
+input CreateCharacterInput {
+  id_actor: String!
+  id_movie: String!
+}
+
+input CreateCustomerInput {
+  id_customer: String!
+}
+
+input CreateMovieInput {
+  id_movie: String!
+}
+
+input CreateWatchInput {
+  id_customer: String!
+  id_movie: String!
+}
+
+input DeleteActorInput {
+  id_actor: String!
+}
+
+input DeleteCharacterInput {
+  id_actor: String!
+  id_movie: String!
+}
+
+input DeleteCustomerInput {
+  id_customer: String!
+}
+
+input DeleteMovieInput {
+  id_movie: String!
+}
+
+input DeleteWatchInput {
+  id_customer: String!
+  id_movie: String!
+}
+
+input TableActorFilterInput {
+  id_actor: TableStringFilterInput
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableCharacterFilterInput {
+  id_actor: TableStringFilterInput
+  id_movie: TableStringFilterInput
+}
+
+input TableCustomerFilterInput {
+  id_customer: TableStringFilterInput
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableMovieFilterInput {
+  id_movie: TableStringFilterInput
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input TableWatchFilterInput {
+  id_customer: TableStringFilterInput
+  id_movie: TableStringFilterInput
+}
+
+input UpdateActorInput {
+  id_actor: String!
+}
+
+input UpdateCharacterInput {
+  id_actor: String!
+  id_movie: String!
+}
+
+input UpdateCustomerInput {
+  id_customer: String!
+}
+
+input UpdateMovieInput {
+  id_movie: String!
+}
+
+input UpdateWatchInput {
+  id_customer: String!
+  id_movie: String!
+}

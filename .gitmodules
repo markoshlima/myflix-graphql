@@ -1,0 +1,3 @@
+[submodule "frontend-graphql"]
+	path = frontend-graphql
+	url = https://github.com/markoshlima/frontend-graphql.git

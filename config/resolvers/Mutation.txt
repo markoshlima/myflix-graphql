@@ -1,0 +1,154 @@
+{
+    "resolvers": [
+        {
+            "typeName": "Mutation",
+            "fieldName": "createActor",
+            "dataSourceName": "ActorDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/createActor",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"PutItem\",\n  \"key\": {\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_actor),\n  },\n  \"attributeValues\": $util.dynamodb.toMapValuesJson($ctx.args.input),\n  \"condition\": {\n    \"expression\": \"attribute_not_exists(#id_actor)\",\n    \"expressionNames\": {\n      \"#id_actor\": \"id_actor\",\n    },\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "createCharacter",
+            "dataSourceName": "Character",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/createCharacter",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"PutItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_actor),\n  },\n  \"attributeValues\": $util.dynamodb.toMapValuesJson($ctx.args.input),\n  \"condition\": {\n    \"expression\": \"attribute_not_exists(#id_movie) AND attribute_not_exists(#id_actor)\",\n    \"expressionNames\": {\n      \"#id_movie\": \"id_movie\",\n      \"#id_actor\": \"id_actor\",\n    },\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "createCustomer",
+            "dataSourceName": "CustomerDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/createCustomer",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"PutItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_customer),\n  },\n  \"attributeValues\": $util.dynamodb.toMapValuesJson($ctx.args.input),\n  \"condition\": {\n    \"expression\": \"attribute_not_exists(#id_customer)\",\n    \"expressionNames\": {\n      \"#id_customer\": \"id_customer\",\n    },\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "createMovie",
+            "dataSourceName": "MovieDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/createMovie",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"PutItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n  },\n  \"attributeValues\": $util.dynamodb.toMapValuesJson($ctx.args.input),\n  \"condition\": {\n    \"expression\": \"attribute_not_exists(#id_movie)\",\n    \"expressionNames\": {\n      \"#id_movie\": \"id_movie\",\n    },\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "createWatch",
+            "dataSourceName": "WatchDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/createWatch",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"PutItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_customer),\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n  },\n  \"attributeValues\": $util.dynamodb.toMapValuesJson($ctx.args.input),\n  \"condition\": {\n    \"expression\": \"attribute_not_exists(#id_customer) AND attribute_not_exists(#id_movie)\",\n    \"expressionNames\": {\n      \"#id_customer\": \"id_customer\",\n      \"#id_movie\": \"id_movie\",\n    },\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "deleteActor",
+            "dataSourceName": "ActorDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/deleteActor",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"DeleteItem\",\n  \"key\": {\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_actor),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "deleteCharacter",
+            "dataSourceName": "Character",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/deleteCharacter",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"DeleteItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_actor),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "deleteCustomer",
+            "dataSourceName": "CustomerDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/deleteCustomer",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"DeleteItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_customer),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "deleteMovie",
+            "dataSourceName": "MovieDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/deleteMovie",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"DeleteItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "deleteWatch",
+            "dataSourceName": "WatchDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/deleteWatch",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"DeleteItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_customer),\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n  },\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "updateActor",
+            "dataSourceName": "ActorDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/updateActor",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"UpdateItem\",\n  \"key\": {\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_actor),\n  },\n\n  ## Set up some space to keep track of things we're updating **\n  #set( $expNames  = {} )\n  #set( $expValues = {} )\n  #set( $expSet = {} )\n  #set( $expAdd = {} )\n  #set( $expRemove = [] )\n\n  ## Iterate through each argument, skipping keys **\n  #foreach( $entry in $util.map.copyAndRemoveAllKeys($ctx.args.input, [\"id_actor\"]).entrySet() )\n    #if( $util.isNull($entry.value) )\n      ## If the argument is set to \"null\", then remove that attribute from the item in DynamoDB **\n\n      #set( $discard = ${expRemove.add(\"#${entry.key}\")} )\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n    #else\n      ## Otherwise set (or update) the attribute on the item in DynamoDB **\n\n      $!{expSet.put(\"#${entry.key}\", \":${entry.key}\")}\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n      $!{expValues.put(\":${entry.key}\", $util.dynamodb.toDynamoDB($entry.value))}\n    #end\n  #end\n\n  ## Start building the update expression, starting with attributes we're going to SET **\n  #set( $expression = \"\" )\n  #if( !${expSet.isEmpty()} )\n    #set( $expression = \"SET\" )\n    #foreach( $entry in $expSet.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} = ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to ADD **\n  #if( !${expAdd.isEmpty()} )\n    #set( $expression = \"${expression} ADD\" )\n    #foreach( $entry in $expAdd.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to REMOVE **\n  #if( !${expRemove.isEmpty()} )\n    #set( $expression = \"${expression} REMOVE\" )\n\n    #foreach( $entry in $expRemove )\n      #set( $expression = \"${expression} ${entry}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Finally, write the update expression into the document, along with any expressionNames and expressionValues **\n  \"update\": {\n    \"expression\": \"${expression}\",\n    #if( !${expNames.isEmpty()} )\n      \"expressionNames\": $utils.toJson($expNames),\n    #end\n    #if( !${expValues.isEmpty()} )\n      \"expressionValues\": $utils.toJson($expValues),\n    #end\n  },\n\n  \"condition\": {\n    \"expression\": \"attribute_exists(#id_actor)\",\n    \"expressionNames\": {\n      \"#id_actor\": \"id_actor\",\n    },\n  }\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "updateCharacter",
+            "dataSourceName": "Character",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/updateCharacter",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"UpdateItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n    \"id_actor\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_actor),\n  },\n\n  ## Set up some space to keep track of things we're updating **\n  #set( $expNames  = {} )\n  #set( $expValues = {} )\n  #set( $expSet = {} )\n  #set( $expAdd = {} )\n  #set( $expRemove = [] )\n\n  ## Iterate through each argument, skipping keys **\n  #foreach( $entry in $util.map.copyAndRemoveAllKeys($ctx.args.input, [\"id_movie\", \"id_actor\"]).entrySet() )\n    #if( $util.isNull($entry.value) )\n      ## If the argument is set to \"null\", then remove that attribute from the item in DynamoDB **\n\n      #set( $discard = ${expRemove.add(\"#${entry.key}\")} )\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n    #else\n      ## Otherwise set (or update) the attribute on the item in DynamoDB **\n\n      $!{expSet.put(\"#${entry.key}\", \":${entry.key}\")}\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n      $!{expValues.put(\":${entry.key}\", $util.dynamodb.toDynamoDB($entry.value))}\n    #end\n  #end\n\n  ## Start building the update expression, starting with attributes we're going to SET **\n  #set( $expression = \"\" )\n  #if( !${expSet.isEmpty()} )\n    #set( $expression = \"SET\" )\n    #foreach( $entry in $expSet.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} = ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to ADD **\n  #if( !${expAdd.isEmpty()} )\n    #set( $expression = \"${expression} ADD\" )\n    #foreach( $entry in $expAdd.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to REMOVE **\n  #if( !${expRemove.isEmpty()} )\n    #set( $expression = \"${expression} REMOVE\" )\n\n    #foreach( $entry in $expRemove )\n      #set( $expression = \"${expression} ${entry}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Finally, write the update expression into the document, along with any expressionNames and expressionValues **\n  \"update\": {\n    \"expression\": \"${expression}\",\n    #if( !${expNames.isEmpty()} )\n      \"expressionNames\": $utils.toJson($expNames),\n    #end\n    #if( !${expValues.isEmpty()} )\n      \"expressionValues\": $utils.toJson($expValues),\n    #end\n  },\n\n  \"condition\": {\n    \"expression\": \"attribute_exists(#id_movie) AND attribute_exists(#id_actor)\",\n    \"expressionNames\": {\n      \"#id_movie\": \"id_movie\",\n      \"#id_actor\": \"id_actor\",\n    },\n  }\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "updateCustomer",
+            "dataSourceName": "CustomerDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/updateCustomer",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"UpdateItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_customer),\n  },\n\n  ## Set up some space to keep track of things we're updating **\n  #set( $expNames  = {} )\n  #set( $expValues = {} )\n  #set( $expSet = {} )\n  #set( $expAdd = {} )\n  #set( $expRemove = [] )\n\n  ## Iterate through each argument, skipping keys **\n  #foreach( $entry in $util.map.copyAndRemoveAllKeys($ctx.args.input, [\"id_customer\"]).entrySet() )\n    #if( $util.isNull($entry.value) )\n      ## If the argument is set to \"null\", then remove that attribute from the item in DynamoDB **\n\n      #set( $discard = ${expRemove.add(\"#${entry.key}\")} )\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n    #else\n      ## Otherwise set (or update) the attribute on the item in DynamoDB **\n\n      $!{expSet.put(\"#${entry.key}\", \":${entry.key}\")}\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n      $!{expValues.put(\":${entry.key}\", $util.dynamodb.toDynamoDB($entry.value))}\n    #end\n  #end\n\n  ## Start building the update expression, starting with attributes we're going to SET **\n  #set( $expression = \"\" )\n  #if( !${expSet.isEmpty()} )\n    #set( $expression = \"SET\" )\n    #foreach( $entry in $expSet.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} = ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to ADD **\n  #if( !${expAdd.isEmpty()} )\n    #set( $expression = \"${expression} ADD\" )\n    #foreach( $entry in $expAdd.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to REMOVE **\n  #if( !${expRemove.isEmpty()} )\n    #set( $expression = \"${expression} REMOVE\" )\n\n    #foreach( $entry in $expRemove )\n      #set( $expression = \"${expression} ${entry}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Finally, write the update expression into the document, along with any expressionNames and expressionValues **\n  \"update\": {\n    \"expression\": \"${expression}\",\n    #if( !${expNames.isEmpty()} )\n      \"expressionNames\": $utils.toJson($expNames),\n    #end\n    #if( !${expValues.isEmpty()} )\n      \"expressionValues\": $utils.toJson($expValues),\n    #end\n  },\n\n  \"condition\": {\n    \"expression\": \"attribute_exists(#id_customer)\",\n    \"expressionNames\": {\n      \"#id_customer\": \"id_customer\",\n    },\n  }\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "updateMovie",
+            "dataSourceName": "MovieDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/updateMovie",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"UpdateItem\",\n  \"key\": {\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n  },\n\n  ## Set up some space to keep track of things we're updating **\n  #set( $expNames  = {} )\n  #set( $expValues = {} )\n  #set( $expSet = {} )\n  #set( $expAdd = {} )\n  #set( $expRemove = [] )\n\n  ## Iterate through each argument, skipping keys **\n  #foreach( $entry in $util.map.copyAndRemoveAllKeys($ctx.args.input, [\"id_movie\"]).entrySet() )\n    #if( $util.isNull($entry.value) )\n      ## If the argument is set to \"null\", then remove that attribute from the item in DynamoDB **\n\n      #set( $discard = ${expRemove.add(\"#${entry.key}\")} )\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n    #else\n      ## Otherwise set (or update) the attribute on the item in DynamoDB **\n\n      $!{expSet.put(\"#${entry.key}\", \":${entry.key}\")}\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n      $!{expValues.put(\":${entry.key}\", $util.dynamodb.toDynamoDB($entry.value))}\n    #end\n  #end\n\n  ## Start building the update expression, starting with attributes we're going to SET **\n  #set( $expression = \"\" )\n  #if( !${expSet.isEmpty()} )\n    #set( $expression = \"SET\" )\n    #foreach( $entry in $expSet.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} = ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to ADD **\n  #if( !${expAdd.isEmpty()} )\n    #set( $expression = \"${expression} ADD\" )\n    #foreach( $entry in $expAdd.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to REMOVE **\n  #if( !${expRemove.isEmpty()} )\n    #set( $expression = \"${expression} REMOVE\" )\n\n    #foreach( $entry in $expRemove )\n      #set( $expression = \"${expression} ${entry}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Finally, write the update expression into the document, along with any expressionNames and expressionValues **\n  \"update\": {\n    \"expression\": \"${expression}\",\n    #if( !${expNames.isEmpty()} )\n      \"expressionNames\": $utils.toJson($expNames),\n    #end\n    #if( !${expValues.isEmpty()} )\n      \"expressionValues\": $utils.toJson($expValues),\n    #end\n  },\n\n  \"condition\": {\n    \"expression\": \"attribute_exists(#id_movie)\",\n    \"expressionNames\": {\n      \"#id_movie\": \"id_movie\",\n    },\n  }\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        },
+        {
+            "typeName": "Mutation",
+            "fieldName": "updateWatch",
+            "dataSourceName": "WatchDynamodb",
+            "resolverArn": "arn+apiId/types/Mutation/resolvers/updateWatch",
+            "requestMappingTemplate": "{\n  \"version\": \"2017-02-28\",\n  \"operation\": \"UpdateItem\",\n  \"key\": {\n    \"id_customer\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_customer),\n    \"id_movie\": $util.dynamodb.toDynamoDBJson($ctx.args.input.id_movie),\n  },\n\n  ## Set up some space to keep track of things we're updating **\n  #set( $expNames  = {} )\n  #set( $expValues = {} )\n  #set( $expSet = {} )\n  #set( $expAdd = {} )\n  #set( $expRemove = [] )\n\n  ## Iterate through each argument, skipping keys **\n  #foreach( $entry in $util.map.copyAndRemoveAllKeys($ctx.args.input, [\"id_customer\", \"id_movie\"]).entrySet() )\n    #if( $util.isNull($entry.value) )\n      ## If the argument is set to \"null\", then remove that attribute from the item in DynamoDB **\n\n      #set( $discard = ${expRemove.add(\"#${entry.key}\")} )\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n    #else\n      ## Otherwise set (or update) the attribute on the item in DynamoDB **\n\n      $!{expSet.put(\"#${entry.key}\", \":${entry.key}\")}\n      $!{expNames.put(\"#${entry.key}\", \"${entry.key}\")}\n      $!{expValues.put(\":${entry.key}\", $util.dynamodb.toDynamoDB($entry.value))}\n    #end\n  #end\n\n  ## Start building the update expression, starting with attributes we're going to SET **\n  #set( $expression = \"\" )\n  #if( !${expSet.isEmpty()} )\n    #set( $expression = \"SET\" )\n    #foreach( $entry in $expSet.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} = ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to ADD **\n  #if( !${expAdd.isEmpty()} )\n    #set( $expression = \"${expression} ADD\" )\n    #foreach( $entry in $expAdd.entrySet() )\n      #set( $expression = \"${expression} ${entry.key} ${entry.value}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Continue building the update expression, adding attributes we're going to REMOVE **\n  #if( !${expRemove.isEmpty()} )\n    #set( $expression = \"${expression} REMOVE\" )\n\n    #foreach( $entry in $expRemove )\n      #set( $expression = \"${expression} ${entry}\" )\n      #if ( $foreach.hasNext )\n        #set( $expression = \"${expression},\" )\n      #end\n    #end\n  #end\n\n  ## Finally, write the update expression into the document, along with any expressionNames and expressionValues **\n  \"update\": {\n    \"expression\": \"${expression}\",\n    #if( !${expNames.isEmpty()} )\n      \"expressionNames\": $utils.toJson($expNames),\n    #end\n    #if( !${expValues.isEmpty()} )\n      \"expressionValues\": $utils.toJson($expValues),\n    #end\n  },\n\n  \"condition\": {\n    \"expression\": \"attribute_exists(#id_customer) AND attribute_exists(#id_movie)\",\n    \"expressionNames\": {\n      \"#id_customer\": \"id_customer\",\n      \"#id_movie\": \"id_movie\",\n    },\n  }\n}",
+            "responseMappingTemplate": "$util.toJson($context.result)",
+            "kind": "UNIT",
+            "maxBatchSize": 0
+        }
+    ]
+}
