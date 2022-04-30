@@ -3,7 +3,7 @@
 Myflix GraphQL as the name sugest is a simple project about testing graphQL interface with AWS AppSync, and discovery the positives and negatives points about implementing this kind of technology.
 The main point is to mapper with resolvers some AWS Dynamodb tables and expose with a GraphQL contract, another objective is compare the performace and how dificult is the implementation/calling between API GraphQL and API Rest.
 
-# **Integration **
+# **Integration**
 
 ![alt text](https://raw.githubusercontent.com/markoshlima/myflix-graphql/main/doc/integration/Integration.png)
 
