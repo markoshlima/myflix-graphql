@@ -7,7 +7,7 @@ The main point is to mapper with resolvers some AWS Dynamodb tables and expose w
 
 ![alt text](https://raw.githubusercontent.com/markoshlima/myflix-graphql/main/doc/integration/Integration.png)
 
-In this picture we can see how simple is the architecture, basicly was created a frontend in Angular, and this frontend call both paths in graphQL and rest to get data from AWS Dynamodb. Bellow there is an image with the final frontend result, the data showed is the same, but the interface was not the same.
+In this picture we can see how simple is the architecture, basicly was created a frontend in Angular and published in a AWS Cloudfront in front of AWS S3 Bucket, and this frontend call both paths in graphQL (AWS AppSync) and rest to get data from AWS Dynamodb. Bellow there is an image with the final frontend result, the data showed is the same, but the interface was not the same.
 
 ![alt text](https://raw.githubusercontent.com/markoshlima/myflix-graphql/main/doc/images/frontend-result.png)
 
@@ -25,11 +25,12 @@ GraphQL is known about offer another way to conect services, another from most p
 **Rest Call**
 ![alt text](https://raw.githubusercontent.com/markoshlima/myflix-graphql/main/doc/images/rest-result.png)
 
-- In these tests, we can see the AppSync being more expensive to network traffic then the rest calls, but it is because rest traffic is from localhost.
+- In these tests, we can see some comparation beetween graphQL and rest API calls.
 
 # Addition Information & Setup
 
 - The backend: `myflix-hexagonal`is used to create all data in AWS Dynamodb and the backend rules.
-- The folder `config` there is the schema.graphql that could be used inside AWS AppSync
+- The folder `graphql-config` there is the schema.graphql that could be used inside AWS AppSync
 - Also the same folder, there are the resolvers that could be used in the AWS tool as well
 - It is needed to created the dynamodb connectors
+- The folder `IaaC` there is the the infraestructure code to S3, ECS.
